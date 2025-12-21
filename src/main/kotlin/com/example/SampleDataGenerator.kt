@@ -11,9 +11,11 @@ class SampleDataGenerator(private val repository: SampleRepository) {
 
     @PostConstruct
     fun generate() {
-        (0..10).forEach {
+        (1..10).forEach {
             repository.save(
-                Sample(name = "name #$it", age = Random.nextInt(0, 99)))
+                Sample(
+                    name = "name #$it",
+                    age = Random.nextInt(0, 99)))
                 .also {
                 println("saved: $it")
             }

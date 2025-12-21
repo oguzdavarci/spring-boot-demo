@@ -10,7 +10,7 @@ class SampleRestController(val service: SampleService, private val repository: S
     fun hello(@RequestParam(required = false) name: String = "") = "Hello $name!"
 
     @GetMapping("/greeting/{userName}")
-    fun greeting(@PathVariable("userName") name: String) = service.greeting(name = "")
+    fun greeting(@PathVariable("userName") name: String) = service.greeting(name = name)
 
     @GetMapping("/scrape")
     fun scrape(@RequestParam url: String) = service.scrape(url)
@@ -23,4 +23,7 @@ class SampleRestController(val service: SampleService, private val repository: S
 
     @DeleteMapping("/{sampleId}")
     fun delete(@PathVariable("sampleId") sample: Sample) = repository.deleteById(sample.id!!)
+
+    @GetMapping("/samples")
+    fun getAll(): List<Sample> = repository.findAll()
 }
